@@ -1,10 +1,10 @@
 #### How to install:
-1. install [docker-compose](https://docs.docker.com/compose/install/).
+1. install [docker](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/) (please download [version 4.8.2](https://docs.docker.com/desktop/release-notes/#docker-desktop-482)).
 2. inside cloned repo, build the container with `docker-compose build`
 3. and run the project `docker-compose up`
 ---
 #### Run tests
-simply type `./run_tests.sh`
+after building containters simply type `./run_tests.sh`
 
 ---
 #### Example requests flow to this service using curl
