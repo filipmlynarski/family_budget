@@ -23,10 +23,13 @@ import budget.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/register/', auth.views.CreateUserView.as_view()),
-    path('accounts/login/', views.obtain_auth_token),
-    path('accounts/logout/', auth_views.LogoutView.as_view()),
-    path('budget/categories/', budget.views.CategoriesView.as_view()),
-    path('budget/categories/<int:pk>', budget.views.CategoryDetail.as_view()),
-    path('budget/budgets/', budget.views.BudgetView.as_view()),
+    path('accounts/register/', auth.views.CreateUserView.as_view(), name='register'),
+    path('accounts/login/', views.obtain_auth_token, name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('budget/categories/', budget.views.CategoriesView.as_view(), name='categories'),
+    path('budget/categories/<int:pk>', budget.views.CategoryDetail.as_view(), name='category'),
+    path('budget/categories/<int:category_pk>/add_user/<int:user_pk>',
+         budget.views.AddToCategoryView.as_view(),
+         name='add_to_category'),
+    path('budget/budgets/<int:category_pk>', budget.views.BudgetView.as_view(), name='budget'),
 ]

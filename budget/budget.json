@@ -1,0 +1,46 @@
+[
+    {
+        "model": "auth.User",
+        "pk": 1,
+        "fields": {
+            "username": "user_1",
+            "password": "pbkdf2_sha256$260000$zIhrjIPqnW9syeorEgq4IA$PbcCb4SvJvV66pQnxZKm5WVX3/xzkTXX/zHW3dKQ2/k="
+        }
+    },
+    {
+        "model": "auth.User",
+        "pk": 2,
+        "fields": {
+            "username": "user_2",
+            "password": "pbkdf2_sha256$260000$zIhrjIPqnW9syeorEgq4IA$PbcCb4SvJvV66pQnxZKm5WVX3/xzkTXX/zHW3dKQ2/k="
+        }
+    },
+    {
+        "model": "budget.Category",
+        "pk": 1,
+        "fields": {
+            "name": "category_1",
+            "owner": "1"
+        }
+    },
+    {
+        "model": "budget.Budget",
+        "pk": 1,
+        "fields": {
+            "type": "EX",
+            "amount": 100,
+            "category": 1,
+            "user": 1
+        }
+    },
+    {
+        "model": "budget.Budget",
+        "pk": 2,
+        "fields": {
+            "type": "IN",
+            "amount": 300,
+            "category": 1,
+            "user": 2
+        }
+    }
+]

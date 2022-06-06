@@ -1,12 +1,13 @@
+from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import User
 
 
 class Category(models.Model):
     name = models.CharField(max_length=128)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User, related_name='categories')
 
 
 class Budget(models.Model):
@@ -20,5 +21,5 @@ class Budget(models.Model):
         decimal_places=2,
         validators=[MinValueValidator(0)],
     )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    users = models.ManyToManyField(User, related_name='budgets')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
