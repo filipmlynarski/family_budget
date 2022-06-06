@@ -1,24 +1,13 @@
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, serializers, status
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from budget.models import Budget, Category
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    owner = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
-        default=serializers.CurrentUserDefault(),
-    )
-
-    class Meta:
-        model = Category
-        fields = ('id', 'name', 'owner', 'users')
-        read_only_fields = ('users',)
+from budget.serializers import BudgetSerializer, CategoryDetailSerializer, CategorySerializer
 
 
 class CategoriesView(generics.ListCreateAPIView):
@@ -27,12 +16,6 @@ class CategoriesView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Category.objects.filter(owner=self.request.user)
-
-
-class CategoryDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ('id', 'name', 'users')
 
 
 class AddToCategoryView(APIView):
@@ -58,12 +41,6 @@ class CategoryDetail(generics.RetrieveUpdateAPIView):
 
     def get_queryset(self):
         return Category.objects.filter(owner=self.request.user)
-
-
-class BudgetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Budget
-        fields = ('user', 'type', 'amount', 'category')
 
 
 class BudgetView(APIView):
